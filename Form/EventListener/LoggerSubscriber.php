@@ -48,19 +48,27 @@ class LoggerSubscriber implements EventSubscriberInterface
 
         $this->generateLog($formName);
 
-        $token = substr($this->session->getId(), 0, 8);
-
         foreach($form->all() as $elem)
         {
-            if (!count($elem) )
-            {
-                $errorString = implode(', ', $this->getFiedErrorsAsString($elem));
-                $error = sprintf("[%s] => '%s' [Errors: %s]", $elem->getName(), $elem->getViewData(), $errorString);
-                $this->log->addError(sprintf("[%s] : %s", $token, $error));
+            if ($elem->hasChildren()) {
+                foreach ($elem->getChildren() as $child)
+                {
+                    $this->logElem($child, $this->prefixify($elem->getName()));
+                }
+            } else {
+                $this->logElem($elem);
             }
 
         }
 
+    }
+
+    protected  function logElem($elem, $prefix = null)
+    {
+        $token = substr($this->session->getId(), 0, 8);
+        $errorString = implode(', ', $this->getFiedErrorsAsString($elem));
+        $error = sprintf("[%s%s] => '%s' [Errors: %s]", $prefix, $elem->getName(), $elem->getViewData(), $errorString);
+        $this->log->addError(sprintf("[%s] : %s", $token, $error));
     }
 
     protected function generateLog($name)
@@ -81,6 +89,11 @@ class LoggerSubscriber implements EventSubscriberInterface
             $errors[] = $error->getMessage();
         }
         return $errors;
+    }
+
+    protected function prefixify($prefix)
+    {
+        return sprintf("%s_", $prefix);
     }
 
 
