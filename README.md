@@ -1,5 +1,6 @@
 SharkFormLoggerBundle
 =======================
+[![Build Status](https://secure.travis-ci.org/agiuliano/SharkLoggerBundle.png?branch=2.1)](https://travis-ci.org/agiuliano/SharkLoggerBundle)
 
 This bundle has a simple, specific purpose: Log form errors ad data
 
