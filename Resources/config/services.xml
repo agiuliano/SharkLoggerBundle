@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <!--
+    <parameters>
+        <parameter key="shark.logger_subscriber.class">Shark\FormLoggerBundle\Form\EventListener\LoggerSubscriber</parameter>
+        <parameter key="shark.logger_subscrib.class">Shark\FormLoggerBundle\Form\EventListener\LoggerSubscriber</parameter>
+    </parameters>
+
+    -->
+
+    <services>
+        <service id="shark.logger_subscriber" class="Shark\FormLoggerBundle\Form\EventListener\LoggerSubscriber">
+            <argument>%kernel.root_dir%/logs</argument>
+            <argument type="service" id="session"/>
+        </service>
+
+        <service id="shark.logger_extension" class="Shark\FormLoggerBundle\Form\Type\FormLoggable">
+            <tag name="form.type_extension" alias="form" />
+            <argument type="service" id="shark.logger_subscriber"/>
+        </service>
+    </services>
+
+</container>

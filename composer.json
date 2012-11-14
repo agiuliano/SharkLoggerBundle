@@ -1,0 +1,25 @@
+{
+    "name": "shark/formlogger-bundle",
+    "type": "symfony-bundle",
+    "description": "Log Symfony Forms",
+    "keywords": ["symfony2 form logger"],
+    "license": "LGPL-3.0+",
+    "authors": [
+        {
+            "name":"Andrea Giuliano",
+            "email":"giulianoand@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "symfony/framework-bundle": "dev-master",
+        "symfony/form": "dev-master",
+        "symfony/validator": "dev-master",
+        "symfony/monolog-bundle": "2.1.*"
+    },
+    "autoload": {
+        "psr-0": { "Shark\\FormLoggerBundle": "" }
+    },
+    "target-dir": "Shark/FormLoggerBundle"
+}
+
