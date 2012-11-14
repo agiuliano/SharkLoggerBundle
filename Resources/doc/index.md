@@ -1,6 +1,51 @@
 SharkFormLoggerBundle Documentation
 =====================================
 
+SharkFormLoggerBundle allows you to log form errors and data
+
+##Log your forms
+**Suppose your form looks like this**
+
+``` php
+
+class SimpleForm extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('field', 'text');
+    }
+
+    public function getName()
+    {
+        return 'simple_form';
+    }
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $collectionConstraint = new Collection(array(
+            'field' => new NotBlank(array('message' => 'Required')),
+        ));
+
+        $resolver->setDefaults(array(
+            'loggable' => true,
+            'validation_constraint' => $collectionConstraint
+        ));
+    }
+}
+```
+
+When your form was submitted, SharkFormLoggerBundle generates for you a log file that contains the form's fields and eventually its errors:
+
+```
+// app/logs/simple_form.log
+
+[2012-11-14 10:26:51] shark.form.ERROR: [8gp7fpe7] : [field] => '' [Errors: Required] [] []
+```
+*8gp7fpe7* is a key that identifies the user that submitted the form 
+
+
+
+
 ## Prerequisites
 
 This version of the bundle requires Symfony 2.1 or higher
@@ -37,7 +82,6 @@ $ php composer.phar update shark/formlogger-bundle
 Enable the bundle in the kernel:
 
 ``` php
-<?php
 // app/AppKernel.php
 
 public function registerBundles()
@@ -53,7 +97,7 @@ public function registerBundles()
 
 In your forms you can enable the logger simply by setting loggable option to true:
 
-```
+```php
 public function setDefaultOptions(OptionsResolverInterface $resolver)
 {
     $resolver->setDefaults(array(
