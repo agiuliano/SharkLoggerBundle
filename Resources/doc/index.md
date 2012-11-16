@@ -22,17 +22,14 @@ class SimpleForm extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $collectionConstraint = new Collection(array(
-            'field' => new NotBlank(array('message' => 'Required')),
-        ));
-
         $resolver->setDefaults(array(
-            'loggable' => true,
-            'validation_constraint' => $collectionConstraint
+            'data_class' => 'Your\Entity\Namespace',
+            'loggable' => true
         ));
     }
 }
 ```
+_This example suppose that 'field' has NotBlank validator_
 
 When your form was submitted, SharkFormLoggerBundle generates for you a log file that contains the form's fields and eventually its errors:
 

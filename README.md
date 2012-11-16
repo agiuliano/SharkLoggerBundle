@@ -2,7 +2,7 @@ SharkFormLoggerBundle
 =======================
 [![Build Status](https://secure.travis-ci.org/agiuliano/SharkLoggerBundle.png?branch=master)](https://travis-ci.org/agiuliano/SharkLoggerBundle)
 
-This bundle has a simple, specific purpose: Log form errors ad data
+This bundle has a simple, specific purpose: Log form errors and data
 
 Documentation
 -------------
