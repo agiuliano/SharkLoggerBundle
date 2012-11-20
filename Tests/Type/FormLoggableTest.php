@@ -1,9 +1,14 @@
 <?php
-/**
- * FormLoggableTest.php
- * @author Andrea Giuliano <giulianoand@gmail.com>
- *         Date: 03/11/12
+
+/*
+ * This file is part of the FormLoggerBundle package.
+ *
+ * (c) Andrea Giuliano <giulianoand@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
+
 namespace Shark\FormLoggerBundle\Test\EventListener;
 
 use Shark\FormLoggerBundle\Form\Type\FormLoggable;

@@ -1,9 +1,14 @@
 <?php
-/**
- * LoggerSubscriber.php
- * @author Andrea Giuliano <giulianoand@gmail.com>
- *         Date: 17/10/12
+
+/*
+ * This file is part of the FormLoggerBundle package.
+ *
+ * (c) Andrea Giuliano <giulianoand@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
+
 namespace Shark\FormLoggerBundle\Form\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -51,8 +56,7 @@ class LoggerSubscriber implements EventSubscriberInterface
         foreach($form->all() as $elem)
         {
             if ($elem->hasChildren()) {
-                foreach ($elem->getChildren() as $child)
-                {
+                foreach ($elem->getChildren() as $child) {
                     $this->logElem($child, $this->prefixify($elem->getName()));
                 }
             } else {
@@ -74,8 +78,7 @@ class LoggerSubscriber implements EventSubscriberInterface
     protected function generateLog($name)
     {
         $this->log = new Logger('shark.form');
-        if (!file_exists(sprintf("%s/%s.log", $this->logPath, $name)))
-        {
+        if (!file_exists(sprintf("%s/%s.log", $this->logPath, $name))) {
             touch(sprintf("%s/%s.log", $this->logPath, $name));
         }
         $this->log->pushHandler(new StreamHandler(sprintf("%s/%s.log", $this->logPath, $name), Logger::WARNING));
@@ -84,8 +87,7 @@ class LoggerSubscriber implements EventSubscriberInterface
     protected function getFiedErrorsAsString($field)
     {
         $errors = array();
-        foreach ($field->getErrors() as $error)
-        {
+        foreach ($field->getErrors() as $error) {
             $errors[] = $error->getMessage();
         }
         return $errors;
@@ -95,6 +97,4 @@ class LoggerSubscriber implements EventSubscriberInterface
     {
         return sprintf("%s_", $prefix);
     }
-
-
 }
