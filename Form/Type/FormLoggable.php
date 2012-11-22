@@ -32,8 +32,7 @@ class FormLoggable extends AbstractTypeExtension
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if(array_key_exists('loggable', $options) && $options['loggable'] === true)
-        {
+        if(array_key_exists('loggable', $options) && $options['loggable'] === true) {
             $builder->addEventSubscriber($this->listener);
         }
     }
