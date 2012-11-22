@@ -53,25 +53,28 @@ class LoggerSubscriber implements EventSubscriberInterface
 
         $this->generateLog($formName);
 
-        foreach($form->all() as $elem)
-        {
-            if ($elem->hasChildren()) {
-                foreach ($elem->getChildren() as $child) {
-                    $this->logElem($child, $this->prefixify($elem->getName()));
-                }
-            } else {
-                $this->logElem($elem);
-            }
-
+        foreach($form->all() as $child) {
+            $this->walkAndLogChild($child);
         }
+    }
 
+    protected function walkAndLogChild(Form $form, $prefix = null)
+    {
+        $prefix = $this->prefixify($prefix, $form->getName());
+        if ($form->hasChildren()) {
+            foreach ($form->getChildren() as $child) {
+                $this->walkAndLogChild($child, $prefix);
+            }
+        } else {
+            $this->logElem($form, $prefix);
+        }
     }
 
     protected  function logElem($elem, $prefix = null)
     {
         $token = substr($this->session->getId(), 0, 8);
         $errorString = implode(', ', $this->getFiedErrorsAsString($elem));
-        $error = sprintf("[%s%s] => '%s' [Errors: %s]", $prefix, $elem->getName(), $elem->getViewData(), $errorString);
+        $error = sprintf("%s => '%s' [Errors: %s]", $prefix, $elem->getViewData(), $errorString);
         $this->log->addError(sprintf("[%s] : %s", $token, $error));
     }
 
@@ -93,8 +96,8 @@ class LoggerSubscriber implements EventSubscriberInterface
         return $errors;
     }
 
-    protected function prefixify($prefix)
+    protected function prefixify($prefix, $string)
     {
-        return sprintf("%s_", $prefix);
+        return sprintf("%s[%s]", $prefix, $string);
     }
 }
