@@ -29,16 +29,16 @@ class LoggerSubscriberTest extends AbstractFormTest
 
     public function setUp()
     {
+        parent::setUp();
+
         $session = $this->getMock("Symfony\\Component\\HttpFoundation\\Session\\Session");
         $this->logPath = __DIR__."/../logs";
         $this->loggerSubscriber = new LoggerSubscriber($this->logPath, $session);
 
-        parent::setUp();
     }
 
     public function testLogFormSimple()
     {
-
         $form = $this->getBuilder('simple_form')
             ->setCompound(true)
             ->setDataMapper($this->getDataMapper())
@@ -52,7 +52,7 @@ class LoggerSubscriberTest extends AbstractFormTest
 
         $child->addError(new FormError('Error!'));
 
-        $this->assertFalse($form->isValid(), "il form non è valido");
+        $this->assertFalse($form->isValid(), "simple_form is not valid");
 
         $this->loggerSubscriber->logForm($form);
 
@@ -69,8 +69,39 @@ class LoggerSubscriberTest extends AbstractFormTest
         fclose($log);
 
         unlink($file);
-
     }
+
+    public function testLogGlobalError()
+    {
+        $form = $this->getBuilder('simple_form')
+            ->setCompound(true)
+            ->setDataMapper($this->getDataMapper())
+            ->getForm();
+
+        $form->bind(array('foo'));
+
+        $form->addError(new FormError('global_error'));
+        $form->addError(new FormError('global_error_2'));
+
+        $this->assertFalse($form->isValid());
+
+        $this->loggerSubscriber->logForm($form);
+
+        $file = sprintf("%s/%s", $this->logPath, "simple_form.log");
+
+        $this->assertFileExists($file, "File log was not created");
+
+        $log = fopen($file, 'r');
+
+        $contents = fread($log, filesize($file));
+
+        $this->assertRegExp("/(global_error)/", $contents);
+
+        fclose($log);
+
+        unlink($file);
+    }
+
 
     protected function createForm()
     {

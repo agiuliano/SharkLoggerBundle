@@ -50,8 +50,9 @@ class LoggerSubscriber implements EventSubscriberInterface
     public function logForm(Form $form)
     {
         $formName = $form->getName();
-
         $this->generateLog($formName);
+
+        $this->logElem($form, '[Global error]');
 
         foreach($form->all() as $child) {
             $this->walkAndLogChild($child);
@@ -73,7 +74,7 @@ class LoggerSubscriber implements EventSubscriberInterface
     protected  function logElem($elem, $prefix = null)
     {
         $token = substr($this->session->getId(), 0, 8);
-        $errorString = implode(', ', $this->getFiedErrorsAsString($elem));
+        $errorString = implode(', ', $this->errorMessagesToArray($elem));
         $error = sprintf("%s => '%s' [Errors: %s]", $prefix, $elem->getViewData(), $errorString);
         $this->log->addError(sprintf("[%s] : %s", $token, $error));
     }
@@ -87,7 +88,7 @@ class LoggerSubscriber implements EventSubscriberInterface
         $this->log->pushHandler(new StreamHandler(sprintf("%s/%s.log", $this->logPath, $name), Logger::WARNING));
     }
 
-    protected function getFiedErrorsAsString($field)
+    protected function errorMessagesToArray($field)
     {
         $errors = array();
         foreach ($field->getErrors() as $error) {
