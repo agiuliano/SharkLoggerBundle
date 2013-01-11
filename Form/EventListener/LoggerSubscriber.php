@@ -52,10 +52,17 @@ class LoggerSubscriber implements EventSubscriberInterface
         $formName = $form->getName();
         $this->generateLog($formName);
 
-        $this->logElem($form, '[Global error]');
+        $this->logGlobalErrors($form);
 
         foreach($form->all() as $child) {
             $this->walkAndLogChild($child);
+        }
+    }
+
+    public function logGlobalErrors(Form $form)
+    {
+        if (count($form->getErrors())) {
+            $this->logElem($form, '[global_error]');
         }
     }
 
