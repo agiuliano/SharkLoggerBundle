@@ -61,7 +61,7 @@ class LoggerSubscriber implements EventSubscriberInterface
     protected function walkAndLogChild(Form $form, $prefix = null)
     {
         $prefix = $this->prefixify($prefix, $form->getName());
-        if ($form->hasChildren()) {
+        if ($form->count()) {
             foreach ($form->getChildren() as $child) {
                 $this->walkAndLogChild($child, $prefix);
             }
