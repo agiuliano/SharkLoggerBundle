@@ -36,7 +36,7 @@ When your form was submitted, SharkFormLoggerBundle generates for you a log file
 ```
 // app/logs/simple_form.log
 
-[2012-11-14 10:26:51] shark.form.ERROR: [8gp7fpe7] : [field] => '' [Errors: Required] [] []
+[2013-03-01 10:26:51] shark.form.ERROR: [8gp7fpe7] : [field] => '' [Errors: Required] [] []
 ```
 *8gp7fpe7* is a key that identifies the user that submitted the form 
 
@@ -45,7 +45,7 @@ When your form was submitted, SharkFormLoggerBundle generates for you a log file
 
 ## Prerequisites
 
-This version of the bundle requires Symfony 2.1 or higher
+This version of the bundle requires Symfony 2.2
 
 ## Installation
 
@@ -62,7 +62,7 @@ Add the following lines in your composer.json:
 ```
 {
     "require": {
-        "shark/formlogger-bundle": "dev-master"
+        "shark/formlogger-bundle": "2.2"
     }
 }
 
