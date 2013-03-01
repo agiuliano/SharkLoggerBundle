@@ -7,17 +7,17 @@ This bundle has a simple, specific purpose: Log form errors ad data
 Documentation
 -------------
 
-[Read the documentation](/agiuliano/SharkLoggerBundle/tree/master/Resources/doc/index.md)
+[Read the documentation](Resources/doc/index.md)
 
 Installation
 ------------
 
-All the installation instructions are located in [documentation](/agiuliano/SharkLoggerBundle/tree/master/Resources/doc/index.md).
+All the installation instructions are located in [documentation](Resources/doc/index.md).
 
 License
 -------
 
-This bundle is released under the LGPL license. See the [complete license text](/agiuliano/SharkLoggerBundle/tree/master/Resources/meta/LICENSE).
+This bundle is released under the LGPL license. See the [complete license text](Resources/meta/LICENSE).
 
 
 Reporting an issue or a feature request
