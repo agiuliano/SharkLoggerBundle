@@ -62,7 +62,7 @@ Add the following lines in your composer.json:
 ```
 {
     "require": {
-        "shark/formlogger-bundle": "2.2"
+        "shark/formlogger-bundle": "2.2.*"
     }
 }
 
