@@ -10,7 +10,7 @@
             "email":"giulianoand@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
         "symfony/framework-bundle": "2.2.*",
         "symfony/form": "2.2.*",
