@@ -13,6 +13,8 @@ Documentation
 
 [Read the documentation for Symfony 2.2](https://github.com/agiuliano/SharkLoggerBundle/blob/v2.2/Resources/doc/index.md)
 
+[Read the documentation for Symfony 2.3](https://github.com/agiuliano/SharkLoggerBundle/blob/v2.3/Resources/doc/index.md)
+
 Installation
 ------------
 

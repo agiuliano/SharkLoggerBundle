@@ -45,7 +45,7 @@ When your form was submitted, SharkFormLoggerBundle generates for you a log file
 
 ## Prerequisites
 
-This version of the bundle requires Symfony 2.1 or higher
+This version of the bundle requires Symfony 2.3 or higher
 
 ## Installation
 
@@ -62,7 +62,7 @@ Add the following lines in your composer.json:
 ```
 {
     "require": {
-        "shark/formlogger-bundle": "dev-master"
+        "shark/formlogger-bundle": "v2.3.*"
     }
 }
 

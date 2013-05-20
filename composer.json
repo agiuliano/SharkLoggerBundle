@@ -10,12 +10,12 @@
             "email":"giulianoand@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "RC",
     "require": {
-        "symfony/framework-bundle": "dev-master",
-        "symfony/form": "dev-master",
-        "symfony/validator": "dev-master",
-        "symfony/monolog-bundle": "2.1.*"
+        "symfony/framework-bundle": "2.3.*",
+        "symfony/form": "2.3.*",
+        "symfony/validator": "2.3.*",
+        "symfony/monolog-bundle": "2.3.*"
     },
     "autoload": {
         "psr-0": { "Shark\\FormLoggerBundle": "" }
