@@ -12,8 +12,8 @@
 namespace Shark\FormLoggerBundle\Form\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\Event\DataEvent;
 use Symfony\Component\Form\Form;
 
 use Monolog\Logger;
@@ -22,8 +22,19 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class LoggerSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @var string
+     */
     private $logPath;
+
+    /**
+     * @var \Symfony\Component\HttpFoundation\Session\Session
+     */
     private $session;
+
+    /**
+     * @var \Monolog\Logger
+     */
     private $log;
 
     public function __construct($path, Session $session)
@@ -33,13 +44,13 @@ class LoggerSubscriber implements EventSubscriberInterface
     }
     public static function getSubscribedEvents()
     {
-        return array(FormEvents::POST_BIND => 'logData');
+        return array(FormEvents::POST_SUBMIT => 'logData');
     }
 
     /**
-     * @param DataEvent $event
+     * @param FormEvent $event
      */
-    public function logData(DataEvent $event)
+    public function logData(FormEvent $event)
     {
         $form = $event->getForm();
 
@@ -70,7 +81,7 @@ class LoggerSubscriber implements EventSubscriberInterface
     {
         $prefix = $this->prefixify($prefix, $form->getName());
         if ($form->count()) {
-            foreach ($form->getChildren() as $child) {
+            foreach ($form->all() as $child) {
                 $this->walkAndLogChild($child, $prefix);
             }
         } else {
