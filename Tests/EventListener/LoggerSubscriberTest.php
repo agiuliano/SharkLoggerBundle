@@ -32,7 +32,7 @@ class LoggerSubscriberTest extends AbstractFormTest
         parent::setUp();
 
         $session = $this->getMock("Symfony\\Component\\HttpFoundation\\Session\\Session");
-        $this->logPath = __DIR__."/../logs";
+        $this->logPath = "/tmp";
         $this->loggerSubscriber = new LoggerSubscriber($this->logPath, $session);
 
     }
